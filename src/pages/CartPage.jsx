@@ -1,10 +1,16 @@
 import React from "react";
 import { useCart } from "../context/CartContext"; // Update the path as per your project structure
 import Footer from "../components/Footer";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const CartPage = () => {
   const { cartItems, removeFromCart, updateQuantity, totalCost } = useCart();
+  const navigate = useNavigate(); // Hook for navigation
+
+  const handleCheckout = () => {
+    // Add checkout logic if necessary
+    navigate("/payment"); // Navigate to Payment Page
+  };
 
   return (
     <div className="flex flex-col min-h-screen">
@@ -62,7 +68,9 @@ const CartPage = () => {
             {cartItems.reduce((total, item) => total + item.quantity, 0)}
           </p>
           <p>Total Cost: ${totalCost().toFixed(2)}</p>
-          <button className="btn btn-success">Checkout</button>
+          <button className="btn btn-success" onClick={handleCheckout}>
+            Checkout
+          </button>
         </div>
       </div>
       <Footer />
