@@ -5,6 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 const PaymentPage = () => {
   const [deliveryPrice, setDeliveryPrice] = useState(null);
   const [zipCode, setZipCode] = useState("");
+  const navigate = useNavigate();
 
   const calculateDeliveryPrice = (zip) => {
     // Placeholder logic for delivery price calculation
@@ -26,9 +27,14 @@ const PaymentPage = () => {
       <header className="p-4 bg-white shadow-md">
         <div className="container mx-auto flex justify-between items-center">
           <h1 className="text-xl font-semibold">Payment</h1>
-          <Link to="/" className="btn btn-primary">
-            Back to Products
-          </Link>
+          <div>
+            <Link to="/" className="btn btn-primary mr-4">
+              Back to Products
+            </Link>
+            <Link to="/cart" className="btn btn-secondary">
+              Back to Cart
+            </Link>
+          </div>
         </div>
       </header>
 
