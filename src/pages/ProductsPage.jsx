@@ -164,10 +164,6 @@ const ProductsPage = () => {
               Explore our wide range of products and find what you need at the
               best prices.
             </p>
-            <Link to="/cart" className="btn btn-primary">
-              View Cart
-            </Link>{" "}
-            {/* Link to Cart Page */}
           </div>
         </div>
       </div>
