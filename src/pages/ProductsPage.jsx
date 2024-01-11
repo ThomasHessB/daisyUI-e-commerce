@@ -3,7 +3,53 @@ import { useCart } from "../context/CartContext"; // Adjust path as necessary
 import { Link } from "react-router-dom";
 import Footer from "../components/Footer";
 
+const THEMES = [
+  "light",
+  "dark",
+  "cupcake",
+  "bumblebee",
+  "emerald",
+  "corporate",
+  "synthwave",
+  "retro",
+  "cyberpunk",
+  "valentine",
+  "halloween",
+  "garden",
+  "forest",
+  "aqua",
+  "lofi",
+  "pastel",
+  "fantasy",
+  "wireframe",
+  "black",
+  "luxury",
+  "dracula",
+  "cmyk",
+  "autumn",
+  "business",
+  "acid",
+  "lemonade",
+  "night",
+  "coffee",
+  "winter",
+  "dim",
+  "nord",
+  "sunset",
+];
+
 const ProductsPage = () => {
+  const [theme, setTheme] = React.useState("light");
+
+  React.useEffect(() => {
+    document.documentElement.setAttribute("data-theme", theme);
+  }, [theme]);
+
+  const handleThemeChange = (e) => {
+    var val = e.target.getAttribute("data-set-theme");
+    setTheme(val);
+  };
+
   const { addToCart, cartItems, totalCost } = useCart();
 
   const totalItems = cartItems.reduce((sum, item) => sum + item.quantity, 0);
@@ -84,6 +130,23 @@ const ProductsPage = () => {
           <Link to="/cart" className="btn">
             Cart ({totalItems} items - ${totalCost().toFixed(2)})
           </Link>
+        </div>
+        <div className="dropdown dropdown-end">
+          <label tabIndex={0} className="btn">
+            {THEMES.length} Themes
+          </label>
+          <ul
+            tabIndex={0}
+            className="menu menu-sm dropdown-content mt-1 z-[1] p-2 shadow bg-base-200 rounded-box w-52 max-h-96 overflow-y-auto"
+          >
+            {THEMES.map((theme, i) => (
+              <li key={theme + i}>
+                <button data-set-theme={theme} onClick={handleThemeChange}>
+                  {i + 1 + ". " + theme}
+                </button>
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
       <div
