@@ -1,6 +1,6 @@
 # DaisyUI E-Commerce Front-End
 
-##Preview
+Preview
 https://cozy-choux-9b4d22.netlify.app/
 
 ## Overview
