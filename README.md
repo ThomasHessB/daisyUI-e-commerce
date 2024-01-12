@@ -13,6 +13,7 @@ This repository hosts the front-end code for a responsive e-commerce website bui
 - **Front-End Focus:** Concentrated on the client-side aspect, perfect for integration with any back-end solution.
 
 ## Technologies Used
+- Node JS
 - Vite
 - React JS
 - TailwindCSS
