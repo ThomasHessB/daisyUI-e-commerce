@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useCart } from "../context/CartContext"; // Adjust path as necessary
 import { Link } from "react-router-dom";
 import Footer from "../components/Footer";
+import ReactDOM from "react-dom";
 
 const THEMES = [
   "light",
@@ -38,7 +39,53 @@ const THEMES = [
   "sunset",
 ];
 
+const ImageModal = ({ image, onClose }) => {
+  const modalStyle = {
+    position: "fixed",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    zIndex: "1000",
+  };
+
+  const backdropStyle = {
+    position: "fixed",
+    top: "0",
+    left: "0",
+    width: "100%",
+    height: "100%",
+    backgroundColor: "rgba(0, 0, 0, 0.5)",
+    zIndex: "999",
+  };
+
+  if (!image) return null;
+
+  return ReactDOM.createPortal(
+    <>
+      <div style={backdropStyle} onClick={onClose} />
+      <div style={modalStyle}>
+        <img
+          src={image}
+          alt="Expanded Product"
+          style={{ maxWidth: "100%", maxHeight: "100%" }}
+        />
+      </div>
+    </>,
+    document.getElementById("modal-root")
+  );
+};
+
 const ProductsPage = () => {
+  const [modalimage, setModalimage] = useState(null);
+
+  const openModal = (image) => {
+    setModalimage(image);
+  };
+
+  const closeModal = () => {
+    setModalimage(null);
+  };
+
   const [theme, setTheme] = React.useState("light");
 
   React.useEffect(() => {
@@ -60,56 +107,56 @@ const ProductsPage = () => {
       id: 1,
       name: "Product 1",
       price: 100,
-      image: "https://picsum.photos/id/235/400/400",
+      image: "https://picsum.photos/id/235/1000/1000",
       description: "Description for Product 1",
     },
     {
       id: 2,
       name: "Product 2",
       price: 150,
-      image: "https://picsum.photos/id/230/400/400",
+      image: "https://picsum.photos/id/230/1000/1000",
       description: "Description for Product 2",
     },
     {
       id: 3,
       name: "Product 3",
       price: 200,
-      image: "https://picsum.photos/id/167/400/400",
+      image: "https://picsum.photos/id/167/1000/1000",
       description: "Description for Product 3",
     },
     {
       id: 4,
       name: "Product 4",
       price: 175,
-      image: "https://picsum.photos/id/43/400/400",
+      image: "https://picsum.photos/id/43/1000/1000",
       description: "Description for Product 4",
     },
     {
       id: 5,
       name: "Product 5",
       price: 265,
-      image: "https://picsum.photos/id/64/400/400",
+      image: "https://picsum.photos/id/64/1000/1000",
       description: "Description for Product 5",
     },
     {
       id: 6,
       name: "Product 6",
       price: 135,
-      image: "https://picsum.photos/id/67/400/400",
+      image: "https://picsum.photos/id/67/1000/1000",
       description: "Description for Product 6",
     },
     {
       id: 7,
       name: "Product 7",
       price: 176,
-      image: "https://picsum.photos/id/132/400/400",
+      image: "https://picsum.photos/id/132/1000/1000",
       description: "Description for Product 7",
     },
     {
       id: 8,
       name: "Product 8",
       price: 214,
-      image: "https://picsum.photos/id/111/400/400",
+      image: "https://picsum.photos/id/111/1000/1000",
       description: "Description for Product 8",
     },
 
@@ -183,6 +230,7 @@ const ProductsPage = () => {
                 src={product.image}
                 alt={product.name}
                 loading="lazy"
+                onClick={() => openModal(product.image)}
               />
               <div className="p-4">
                 <h3 className="text-xl font-bold">{product.name}</h3>
@@ -199,6 +247,7 @@ const ProductsPage = () => {
           ))}
         </div>
       </div>
+      <ImageModal image={modalimage} onClose={closeModal} />
       <Footer />
     </div>
   );

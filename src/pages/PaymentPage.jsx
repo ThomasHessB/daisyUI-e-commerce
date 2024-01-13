@@ -28,9 +28,6 @@ const PaymentPage = () => {
         <div className="container mx-auto flex justify-between items-center">
           <h1 className="text-xl font-semibold">Payment</h1>
           <div>
-            <Link to="/" className="btn btn-primary mr-4">
-              Back to Products
-            </Link>
             <Link to="/cart" className="btn btn-secondary">
               Back to Cart
             </Link>
